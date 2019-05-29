@@ -18,7 +18,7 @@ import android.nfc.tech.MifareUltralight.PAGE_SIZE
 
 class RecyclerFragment : Fragment() {
     private  var users: MutableList<User> = mutableListOf()
-
+    private var isLoading = false
     companion object {
         fun newInstance(): RecyclerFragment {
 
@@ -37,6 +37,7 @@ class RecyclerFragment : Fragment() {
         recycler.layoutManager = layoutManagerUser
         recycler.adapter = userAdapter
 
+
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -49,14 +50,14 @@ class RecyclerFragment : Fragment() {
                 val firstVisibleItemPosition = layoutManagerUser.findFirstVisibleItemPosition()
 
 
-//                if (!isLoading && !isLastPage) {
+                if (!isLoading) {
                 if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
                     && firstVisibleItemPosition >= 0
                     && totalItemCount >= PAGE_SIZE
                 ) {
                     getAllUsers(users.last().id)
                 }
-//                }
+                }
             }
         })
         getAllUsers(0)
@@ -64,6 +65,8 @@ class RecyclerFragment : Fragment() {
 
 
     private fun getAllUsers(i: Int) {
+        Log.d("tag", "Getallusers")
+        isLoading = true
         ApiGit.apiService.getUsers(i).enqueue(object : retrofit2.Callback<List<User>> {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 Log.d("tag", "fail")
@@ -77,7 +80,7 @@ class RecyclerFragment : Fragment() {
                 users = response.body()!!.toMutableList()
 
                 userAdapter.addData(users)
-
+                isLoading = false
             }
 
 
