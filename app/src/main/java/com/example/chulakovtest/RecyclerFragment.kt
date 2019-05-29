@@ -17,7 +17,7 @@ import android.nfc.tech.MifareUltralight.PAGE_SIZE
 
 
 class RecyclerFragment : Fragment() {
-    private lateinit var users: List<User>
+    private  var users: MutableList<User> = mutableListOf()
 
     companion object {
         fun newInstance(): RecyclerFragment {
@@ -73,8 +73,8 @@ class RecyclerFragment : Fragment() {
 
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 Log.d("tag", "response")
-                
-                users = response.body()!!
+
+                users = response.body()!!.toMutableList()
 
                 userAdapter.addData(users)
 
