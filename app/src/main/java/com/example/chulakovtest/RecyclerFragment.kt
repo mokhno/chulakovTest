@@ -39,6 +39,11 @@ class RecyclerFragment : Fragment() {
 
     var userAdapter: UsersAdapter = UsersAdapter()
     lateinit var layoutManagerUser: LinearLayoutManager
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getAllUsers(0)
+
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fr_recycler, container, false)
@@ -77,7 +82,7 @@ class RecyclerFragment : Fragment() {
                 }
             }
         })
-        getAllUsers(0)
+//        getAllUsers(0)
     }
 
 
