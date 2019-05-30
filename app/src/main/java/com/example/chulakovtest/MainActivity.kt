@@ -1,5 +1,6 @@
 package com.example.chulakovtest
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,16 +11,22 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), UsersAdapter.OnItemClickListener {
+
+    var recyclerFragment:RecyclerFragment = RecyclerFragment.newInstance()
+
+    override fun onItemClick(user: User) {
+//supportFragmentManager.beginTransaction().hide(recyclerFragment)
+        supportFragmentManager.beginTransaction().replace(R.id.container, ProfileFragment.newInstance(user)).addToBackStack(null).commit()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-supportFragmentManager.beginTransaction().replace(R.id.container,RecyclerFragment.newInstance()).commit()
-
-
-
+        supportFragmentManager.beginTransaction().add(R.id.container, recyclerFragment).commit()
 
     }
+
 
 }

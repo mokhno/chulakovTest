@@ -1,5 +1,6 @@
 package com.example.chulakovtest
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -17,8 +18,11 @@ import android.nfc.tech.MifareUltralight.PAGE_SIZE
 
 
 class RecyclerFragment : Fragment() {
-    private  var users: MutableList<User> = mutableListOf()
+    private var users: MutableList<User> = mutableListOf()
     private var isLoading = false
+    private lateinit var mListener: UsersAdapter.OnItemClickListener
+
+
     companion object {
         fun newInstance(): RecyclerFragment {
 
@@ -26,16 +30,29 @@ class RecyclerFragment : Fragment() {
         }
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is UsersAdapter.OnItemClickListener) {
+            mListener = context
+        }
+    }
+
     var userAdapter: UsersAdapter = UsersAdapter()
-    var layoutManagerUser = LinearLayoutManager(activity)
+    lateinit var layoutManagerUser: LinearLayoutManager
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.fr_recycler, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        layoutManagerUser = LinearLayoutManager(activity)
         recycler.layoutManager = layoutManagerUser
+
         recycler.adapter = userAdapter
+
+        userAdapter.setListener(mListener)
 
 
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -51,12 +68,12 @@ class RecyclerFragment : Fragment() {
 
 
                 if (!isLoading) {
-                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
-                    && firstVisibleItemPosition >= 0
-                    && totalItemCount >= PAGE_SIZE
-                ) {
-                    getAllUsers(users.last().id)
-                }
+                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                        && firstVisibleItemPosition >= 0
+                        && totalItemCount >= PAGE_SIZE
+                    ) {
+                        getAllUsers(users.last().id)
+                    }
                 }
             }
         })
@@ -85,6 +102,11 @@ class RecyclerFragment : Fragment() {
 
 
         })
+    }
+
+    override fun onDetach() {
+//        mListener = null
+        super.onDetach()
     }
 
 }
