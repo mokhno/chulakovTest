@@ -58,7 +58,7 @@ class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(user: User) {
         login.text = user.login
         id.text = user.id.toString()
-        Picasso.get().load(user.avatar_url).into(avatar)
+        Picasso.get().load(user.avatar_url).transform(RoundedCornersTransform()).into(avatar)
         this.user = user
     }
     fun setListener(listener: UsersAdapter.OnItemClickListener) {

@@ -52,14 +52,7 @@ class ProfileFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-    }
-
-    fun getProfile(user: User) {
+    private fun getProfile(user: User) {
         ApiGit.apiService.getProfile(user.login).enqueue(object : retrofit2.Callback<Profile> {
             override fun onFailure(call: Call<Profile>, t: Throwable) {
 
@@ -69,22 +62,30 @@ class ProfileFragment : Fragment() {
 
                 profile = response.body()!!
 
+                initViews()
 
-//                var avatar: ImageView = view.findViewById(R.id.imageViewAvatar)
 
-                Picasso.get().load(Uri.parse(profile.avatar_url)).into(imageViewAvatar)
-
-                loginTv.text = profile.login
-                tv_html.text = "Ссылка на профиль"
-                tv_html.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(user.html_url))
-                    startActivity(intent)
-                }
-                tv_bio.text = profile.bio
             }
 
 
         })
+
+    }
+
+    fun initViews() {
+        Picasso.get().load(Uri.parse(profile.avatar_url)).into(imageViewAvatar)
+        tv_name.text = profile.name
+        loginTv.text = profile.login
+        tv_html.text = "Ссылка на профиль"
+        tv_html.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(user.html_url))
+            startActivity(intent)
+        }
+        tv_bio.text = profile.bio
+
+
+        tv_followers.text = "Followers: ${profile.followers}"
+        tv_following.text = "Following: ${profile.following}"
 
     }
 

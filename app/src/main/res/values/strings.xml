@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">chulakovTest</string>
+    <string name="followring">Followring:</string>
+    <string name="follovers">Follovers:</string>
 </resources>

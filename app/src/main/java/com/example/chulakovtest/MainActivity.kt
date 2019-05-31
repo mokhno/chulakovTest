@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(), UsersAdapter.OnItemClickListener {
 
     override fun onItemClick(user: User) {
 //supportFragmentManager.beginTransaction().hide(recyclerFragment)
-        supportFragmentManager.beginTransaction().replace(R.id.container, ProfileFragment.newInstance(user)).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().setCustomAnimations(R.animator.slide_in_left,R.animator.slide_in_right).replace(R.id.container, ProfileFragment.newInstance(user)).addToBackStack(null).commit()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
