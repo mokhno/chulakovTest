@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fr_profile.*
 class UsersAdapter : RecyclerView.Adapter<UsersHolder>() {
 
     var userList: MutableList<User> = mutableListOf()
-    private lateinit var listener:OnItemClickListener
+    private lateinit var listener: OnItemClickListener
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): UsersHolder {
         var layoutInflater: LayoutInflater = LayoutInflater.from(p0.context)
@@ -36,7 +36,10 @@ class UsersAdapter : RecyclerView.Adapter<UsersHolder>() {
 
         notifyDataSetChanged()
     }
-    fun setListener(onItemClickListener: OnItemClickListener){listener = onItemClickListener}
+
+    fun setListener(onItemClickListener: OnItemClickListener) {
+        listener = onItemClickListener
+    }
 
 
     interface OnItemClickListener {
@@ -54,15 +57,15 @@ class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val avatar: ImageView = view.findViewById(R.id.avatar_image)
 
 
-
     fun bind(user: User) {
         login.text = user.login
         id.text = user.id.toString()
         Picasso.get().load(user.avatar_url).transform(RoundedCornersTransform()).into(avatar)
         this.user = user
     }
+
     fun setListener(listener: UsersAdapter.OnItemClickListener) {
-        itemView.setOnClickListener{listener.onItemClick(user)}
+        itemView.setOnClickListener { listener.onItemClick(user) }
 
     }
 

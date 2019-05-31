@@ -15,6 +15,8 @@ import kotlinx.android.synthetic.main.fr_recycler.*
 import retrofit2.Call
 import retrofit2.Response
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
+import android.widget.GridLayout
+import androidx.recyclerview.widget.GridLayoutManager
 
 
 class RecyclerFragment : Fragment() {
@@ -25,7 +27,6 @@ class RecyclerFragment : Fragment() {
 
     companion object {
         fun newInstance(): RecyclerFragment {
-
             return RecyclerFragment()
         }
     }
@@ -38,12 +39,13 @@ class RecyclerFragment : Fragment() {
     }
 
     var userAdapter: UsersAdapter = UsersAdapter()
-    lateinit var layoutManagerUser: LinearLayoutManager
+    lateinit var layoutManagerUser: GridLayoutManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getAllUsers(0)
 
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fr_recycler, container, false)
@@ -52,7 +54,7 @@ class RecyclerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        layoutManagerUser = LinearLayoutManager(activity)
+        layoutManagerUser = GridLayoutManager(activity, 2)
         recycler.layoutManager = layoutManagerUser
 
         recycler.adapter = userAdapter
@@ -61,10 +63,6 @@ class RecyclerFragment : Fragment() {
 
 
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val visibleItemCount = layoutManagerUser.childCount
@@ -82,7 +80,6 @@ class RecyclerFragment : Fragment() {
                 }
             }
         })
-//        getAllUsers(0)
     }
 
 
@@ -109,9 +106,5 @@ class RecyclerFragment : Fragment() {
         })
     }
 
-    override fun onDetach() {
-//        mListener = null
-        super.onDetach()
-    }
 
 }

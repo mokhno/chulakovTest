@@ -15,15 +15,14 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), UsersAdapter.OnItemClickListener {
 
-    var recyclerFragment:RecyclerFragment = RecyclerFragment.newInstance()
-private lateinit var navController: NavController
+    var recyclerFragment: RecyclerFragment = RecyclerFragment.newInstance()
+    private lateinit var navController: NavController
     override fun onItemClick(user: User) {
-//supportFragmentManager.beginTransaction().hide(recyclerFragment)
-//
+
 //        supportFragmentManager.beginTransaction().setCustomAnimations(R.animator.slide_in_left,R.animator.slide_in_right).replace(R.id.container, ProfileFragment.newInstance(user)).addToBackStack(null).commit()
         var args = Bundle()
         args.putParcelable("USER", user)
-        navController.navigate(R.id.profileFragment,args)
+        navController.navigate(R.id.action_recyclerFragment_to_profileFragment, args)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +30,7 @@ private lateinit var navController: NavController
         setContentView(R.layout.activity_main)
 
 //        supportFragmentManager.beginTransaction().add(R.id.container, recyclerFragment).commit()
-//
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         navController.navigate(R.id.recyclerFragment)
     }

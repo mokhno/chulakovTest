@@ -76,8 +76,10 @@ class ProfileFragment : Fragment() {
         Picasso.get().load(Uri.parse(profile.avatar_url)).into(imageViewAvatar)
         tv_name.text = profile.name
         loginTv.text = profile.login
-        loginTv.setOnClickListener {   val intent = Intent(Intent.ACTION_VIEW, Uri.parse(user.html_url))
-            startActivity(intent) }
+        loginTv.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(user.html_url))
+            startActivity(intent)
+        }
 //        tv_html.text = "Ссылка на профиль"
 //        tv_html.setOnClickListener {
 //            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(user.html_url))

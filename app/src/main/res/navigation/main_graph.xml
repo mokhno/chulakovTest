@@ -6,8 +6,9 @@
     <fragment android:id="@+id/recyclerFragment" android:name="com.example.chulakovtest.RecyclerFragment"
               android:label="RecyclerFragment">
         <action android:id="@+id/action_recyclerFragment_to_profileFragment" app:destination="@id/profileFragment"
-                app:enterAnim="@animator/slide_in_left" app:exitAnim="@animator/slide_in_right"
-                app:popEnterAnim="@animator/slide_out_left" app:popExitAnim="@animator/slide_out_right"/>
+                app:enterAnim="@anim/in_from_right"
+                app:exitAnim="@anim/out_to_left" app:popEnterAnim="@anim/in_from_left"
+                app:popExitAnim="@anim/out_to_right"/>
     </fragment>
     <fragment android:id="@+id/profileFragment" android:name="com.example.chulakovtest.ProfileFragment"
               android:label="ProfileFragment"/>
