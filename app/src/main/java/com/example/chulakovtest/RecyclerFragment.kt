@@ -56,12 +56,9 @@ class RecyclerFragment : Fragment() {
 
         layoutManagerUser = GridLayoutManager(activity, 2)
         recycler.layoutManager = layoutManagerUser
-
         recycler.adapter = userAdapter
-
         userAdapter.setListener(mListener)
-
-
+        
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -89,15 +86,11 @@ class RecyclerFragment : Fragment() {
         ApiGit.apiService.getUsers(i).enqueue(object : retrofit2.Callback<List<User>> {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 Log.d("tag", "fail")
-
-
             }
 
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 Log.d("tag", "response")
-
                 users = response.body()!!.toMutableList()
-
                 userAdapter.addData(users)
                 isLoading = false
             }

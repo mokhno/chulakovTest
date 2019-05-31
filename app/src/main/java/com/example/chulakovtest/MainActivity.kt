@@ -15,8 +15,9 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), UsersAdapter.OnItemClickListener {
 
-    var recyclerFragment: RecyclerFragment = RecyclerFragment.newInstance()
+//    var recyclerFragment: RecyclerFragment = RecyclerFragment.newInstance()
     private lateinit var navController: NavController
+
     override fun onItemClick(user: User) {
 
 //        supportFragmentManager.beginTransaction().setCustomAnimations(R.animator.slide_in_left,R.animator.slide_in_right).replace(R.id.container, ProfileFragment.newInstance(user)).addToBackStack(null).commit()

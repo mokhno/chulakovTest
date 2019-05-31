@@ -41,33 +41,21 @@ class ProfileFragment : Fragment() {
         user = arguments!!.getParcelable("USER")
         getProfile(user)
         Log.d("tag", "massage" + user.id)
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.fr_profile, container, false)
-
-
     }
 
     private fun getProfile(user: User) {
         ApiGit.apiService.getProfile(user.login).enqueue(object : retrofit2.Callback<Profile> {
             override fun onFailure(call: Call<Profile>, t: Throwable) {
-
             }
 
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-
                 profile = response.body()!!
-
                 initViews()
-
-
             }
-
-
         })
 
     }

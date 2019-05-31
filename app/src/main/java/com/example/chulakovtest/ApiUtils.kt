@@ -9,9 +9,9 @@ import retrofit2.http.Query
 
 interface ApiUtils {
     @GET("users")
-    abstract fun getUsers(@Query("since") since:Int): Call<List<User>>
+    abstract fun getUsers(@Query("since") since: Int): Call<List<User>>
 
 
-@GET("users/{login}")
-abstract fun getProfile(@Path ("login") login:String): Call<Profile>
+    @GET("users/{login}")
+    abstract fun getProfile(@Path("login") login: String): Call<Profile>
 }

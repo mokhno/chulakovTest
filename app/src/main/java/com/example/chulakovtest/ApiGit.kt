@@ -7,13 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiGit {
     private val client: OkHttpClient? = null
-    private var retrofit: Retrofit? = null
-    private var gson: Gson? = null
+    private var retrofit = getRetrofit()
+    private var gson = Gson()
     private var api: ApiUtils? = null
     val apiService: ApiUtils
         get() {
             if (api == null) {
-                api = getRetrofit().create<ApiUtils>(ApiUtils::class.java!!)
+                api = getRetrofit().create<ApiUtils>(ApiUtils::class.java)
             }
             return api!!
 
@@ -31,8 +31,8 @@ object ApiGit {
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
                 .baseUrl(BuildConfig.SERVER_URL)
-                //                    .client(getClient())
-                .addConverterFactory(GsonConverterFactory.create(gson!!))
+                //.client(getClient())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
         }
         return retrofit!!
