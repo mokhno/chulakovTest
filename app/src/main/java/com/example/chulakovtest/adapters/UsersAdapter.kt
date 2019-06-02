@@ -1,4 +1,4 @@
-package com.example.chulakovtest
+package com.example.chulakovtest.adapters
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.chulakovtest.Model.User
+import com.example.chulakovtest.R
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fr_profile.*
 
 class UsersAdapter : RecyclerView.Adapter<UsersHolder>() {
 
     var userList: MutableList<User> = mutableListOf()
     private lateinit var listener: OnItemClickListener
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): UsersHolder {
-        var layoutInflater: LayoutInflater = LayoutInflater.from(p0.context)
-        var view: View = layoutInflater.inflate(R.layout.res_user, p0, false)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): UsersHolder {
+        var layoutInflater: LayoutInflater = LayoutInflater.from(viewGroup.context)
+        var view: View = layoutInflater.inflate(R.layout.item_user, viewGroup, false)
         return UsersHolder(view)
 
     }
@@ -26,9 +26,9 @@ class UsersAdapter : RecyclerView.Adapter<UsersHolder>() {
         return userList.size
     }
 
-    override fun onBindViewHolder(p0: UsersHolder, p1: Int) {
-        p0.bind(userList[p1])
-        p0.setListener(listener)
+    override fun onBindViewHolder(holder: UsersHolder, position: Int) {
+        holder.bind(userList[position])
+        holder.setListener(listener)
     }
 
     fun addData(users: List<User>) {
@@ -60,7 +60,7 @@ class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(user: User) {
         login.text = user.login
         id.text = user.id.toString()
-        Picasso.get().load(user.avatar_url).transform(RoundedCornersTransform()).into(avatar)
+        Picasso.get().load(user.avatarUrl).transform(RoundedCornersTransform()).into(avatar)
         this.user = user
     }
 

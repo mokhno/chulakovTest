@@ -1,4 +1,4 @@
-package com.example.chulakovtest
+package com.example.chulakovtest.network
 
 import com.example.chulakovtest.Model.Profile
 import com.example.chulakovtest.Model.User
@@ -7,11 +7,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiUtils {
+interface GithubApi {
     @GET("users")
-    abstract fun getUsers(@Query("since") since: Int): Call<List<User>>
+     fun getUsers(@Query("since") since: Int): Call<List<User>>
 
 
     @GET("users/{login}")
-    abstract fun getProfile(@Path("login") login: String): Call<Profile>
+     fun getProfile(@Path("login") login: String): Call<Profile>
 }

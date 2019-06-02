@@ -4,82 +4,27 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
-    val avatar_url: String,
-    val events_url: String,
-    val followers_url: String,
-    val following_url: String,
-    val gists_url: String,
-    val gravatar_id: String,
-    val html_url: String,
+    @SerializedName("avatar_url")  val avatarUrl: String,
+    @SerializedName("events_url")  val eventsUrl: String,
+    @SerializedName("followers_url")   val followersUrl: String,
+    @SerializedName("following_url")  val followingUrl: String,
+    @SerializedName("gists_url") val gistsUrl: String,
+    @SerializedName("gravatar_id")  val gravatarId: String,
+    @SerializedName("html_url")   val htmlUrl: String,
     val id: Int,
     val login: String,
-    val node_id: String,
-    val organizations_url: String,
-    val received_events_url: String,
-    val repos_url: String,
-    val site_admin: Boolean,
-    val starred_url: String,
-    val subscriptions_url: String,
+    @SerializedName("node_id")  val nodeId: String,
+    @SerializedName("organizations_url")   val organizationsUrl: String,
+    @SerializedName("received_events_url")  val receivedEventsUrl: String,
+    @SerializedName("repos_url")  val reposUrl: String,
+    @SerializedName("site_admin")   val siteAdmin: Boolean,
+    @SerializedName("starred_url")   val starredUrl: String,
+    @SerializedName("subscriptions_url")   val subscriptionsUrl: String,
     val type: String,
     val url: String
-): Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
-    ) {
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(avatar_url)
-        parcel.writeString(events_url)
-        parcel.writeString(followers_url)
-        parcel.writeString(following_url)
-        parcel.writeString(gists_url)
-        parcel.writeString(gravatar_id)
-        parcel.writeString(html_url)
-        parcel.writeInt(id)
-        parcel.writeString(login)
-        parcel.writeString(node_id)
-        parcel.writeString(organizations_url)
-        parcel.writeString(received_events_url)
-        parcel.writeString(repos_url)
-        parcel.writeByte(if (site_admin) 1 else 0)
-        parcel.writeString(starred_url)
-        parcel.writeString(subscriptions_url)
-        parcel.writeString(type)
-        parcel.writeString(url)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<User> {
-        override fun createFromParcel(parcel: Parcel): User {
-            return User(parcel)
-        }
-
-        override fun newArray(size: Int): Array<User?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+): Parcelable
 
